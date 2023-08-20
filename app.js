@@ -1,4 +1,4 @@
-// require("dotenv").config();
+require("dotenv").config();
 
 const express = require("express");
 
@@ -7,9 +7,6 @@ const { errors } = require("celebrate");
 
 const cors = require("cors");
 const helmet = require("helmet");
-
-// const { errorHandler } = require("./middlewares/error-handler");
-// const { requestLogger, errorLogger } = require("./middlewares/logger");
 
 const limiter = require("./utils/limiter");
 
