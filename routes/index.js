@@ -19,7 +19,7 @@ router.use("/users", user);
 router.use("/articles", article);
 
 router.use(() => {
-  next(new NotFoundError("Address does not exist."));
+  throw new NotFoundError("Address does not exist.");
 });
 
 module.exports = router;
