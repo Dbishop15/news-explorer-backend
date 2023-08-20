@@ -1,7 +1,5 @@
 require("dotenv").config();
 
-var requireStack = require("require-stack");
-
 const express = require("express");
 
 const mongoose = require("mongoose");
@@ -9,6 +7,9 @@ const { errors } = require("celebrate");
 
 const cors = require("cors");
 const helmet = require("helmet");
+
+const { errorHandler } = require("./middlewares/error-handler");
+const { requestLogger, errorLogger } = require("./middlewares/logger");
 
 const limiter = require("./utils/limiter");
 
@@ -24,6 +25,19 @@ app.use(helmet());
 app.use(limiter);
 app.use(express.json());
 app.use(cors());
+
+app.use(requestLogger);
+
+app.get("/crash-test", () => {
+  setTimeout(() => {
+    throw new Error("Server will crash now");
+  }, 0);
+});
+
 app.use(routes);
+app.use(errorLogger);
+
 app.use(errors());
+app.use(errorHandler);
+
 app.listen(PORT);
