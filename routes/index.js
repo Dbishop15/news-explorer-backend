@@ -1,8 +1,7 @@
 const router = require("express").Router();
 
-const article = require("./articles");
-
 const user = require("./users");
+const article = require("./articles");
 
 const NotFoundError = require("../errors/NotFoundError");
 
@@ -19,7 +18,7 @@ router.post("/signin", validateUserLogIn, login);
 router.use("/users", user);
 router.use("/articles", article);
 
-router.use((req, res, next) => {
+router.use(() => {
   next(new NotFoundError("Address does not exist."));
 });
 

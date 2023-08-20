@@ -5,7 +5,7 @@ const NotFoundError = require("../errors/NotFoundError");
 const article = require("../models/article");
 
 const getArticles = (req, res, next) => {
-  Article.find({ owner: req.user?._id })
+  Article.find({})
     .then((data) => res.send(data))
     .catch(next);
 };
