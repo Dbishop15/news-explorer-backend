@@ -15,8 +15,8 @@ const {
 router.post("/signup", validateUserBody, createUser);
 router.post("/signin", validateUserLogIn, login);
 
-router.use("/users", user);
 router.use("/articles", article);
+router.use("/users", user);
 
 router.use(() => {
   throw new NotFoundError("Address does not exist.");

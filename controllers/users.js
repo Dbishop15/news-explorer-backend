@@ -7,40 +7,6 @@ const NotFoundError = require("../errors/NotFoundError");
 const UnauthorizedError = require("../errors/UnauthorizedError");
 const { JWT_SECRET } = require("../utils/config");
 
-const getUsers = (req, res, next) => {
-  User.find({})
-    .then((users) => {
-      if (!users) {
-        next(new NotFoundError("User not found"));
-      } else {
-        res.send({ data: users });
-      }
-    })
-    .catch((err) => {
-      next(err);
-    });
-};
-
-const getUser = (req, res, next) => {
-  const { userId } = req.params;
-
-  User.findById(userId)
-    .then((user) => {
-      if (!user) {
-        next(new NotFoundError("User not found"));
-      } else {
-        res.send({ data: user });
-      }
-    })
-    .catch((err) => {
-      if (err.name === "CastError") {
-        next(new BadRequestError("Invalid user ID"));
-      } else {
-        next(err);
-      }
-    });
-};
-
 const createUser = (req, res, next) => {
   const { name, email, password } = req.body;
 
@@ -123,8 +89,6 @@ const getCurrentUser = (req, res, next) => {
 };
 
 module.exports = {
-  getUsers,
-  getUser,
   createUser,
   login,
   getCurrentUser,
