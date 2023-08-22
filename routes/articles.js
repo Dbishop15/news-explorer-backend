@@ -5,15 +5,15 @@ const auth = require("../middlewares/auth");
 const {
   addArticle,
   getArticles,
-  removeArticle,
+  removeArticle
 } = require("../controllers/articles");
 
 const {
   validateArticleId,
-  validateArticleInfoBody,
+  validateArticleInfoBody
 } = require("../middlewares/validation");
 
-router.get("/", getArticles);
+router.get("/", auth.handleAutError, getArticles);
 router.post("/", auth.handleAutError, validateArticleInfoBody, addArticle);
 
 router.delete(
