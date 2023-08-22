@@ -5,7 +5,8 @@ const BadRequestError = require("../errors/BadRequestError");
 const ConFlictError = require("../errors/ConflictError");
 const NotFoundError = require("../errors/NotFoundError");
 const UnauthorizedError = require("../errors/UnauthorizedError");
-const { JWT_SECRET } = require("../utils/config");
+
+const { NODE_ENV, JWT_SECRET } = process.env;
 
 const createUser = (req, res, next) => {
   const { name, email, password } = req.body;
@@ -55,9 +56,13 @@ const login = (req, res, next) => {
         if (!matched) {
           next(new UnauthorizedError("Email or Password not found"));
         }
-        const token = jwt.sign({ _id: user._id }, JWT_SECRET, {
-          expiresIn: "7d",
-        });
+        const token = jwt.sign(
+          { _id: user._id },
+          NODE_ENV === "production" ? JWT_SECRET : "dev_secret",
+          {
+            expiresIn: "7d",
+          }
+        );
         res.send({ token });
       });
     })
