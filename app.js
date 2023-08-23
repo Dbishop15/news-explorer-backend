@@ -15,10 +15,8 @@ const limiter = require("./utils/limiter");
 
 const { MONGO_DEV_ADDRESS } = require("./utils/config");
 
-const { PORT = 3001, NODE_ENV } = process.env;
-mongoose.connect(
-  NODE_ENV === "production" ? MONGO_DEV_ADDRESS : MONGO_DEV_ADDRESS
-);
+const { PORT = 3001, DATABASE_URL, NODE_ENV } = process.env;
+mongoose.connect(NODE_ENV === "production" ? DATABASE_URL : MONGO_DEV_ADDRESS);
 
 const routes = require("./routes");
 
