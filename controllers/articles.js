@@ -40,7 +40,7 @@ const removeArticle = (req, res, next) => {
       if (!article) {
         return next(new NotFoundError("Article not found"));
       }
-      if (!article.owner.toString() === req.user._id) {
+      if (article.owner.toString() !== req.user._id) {
         return next(
           new ForbiddenError("User not authorized to delete article")
         );
