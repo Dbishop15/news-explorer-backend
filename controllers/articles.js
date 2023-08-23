@@ -5,7 +5,7 @@ const NotFoundError = require("../errors/NotFoundError");
 
 const getArticles = (req, res, next) => {
   Article.find({ owner: req.user._id })
-    .then(items => res.send({ data: items }))
+    .then((items) => res.send({ data: items }))
     .catch(next);
 };
 
@@ -20,12 +20,12 @@ const addArticle = (req, res, next) => {
     source,
     link,
     image,
-    owner: req.user._id
+    owner: req.user._id,
   })
-    .then(article => {
+    .then((article) => {
       res.send({ data: article });
     })
-    .catch(err => {
+    .catch((err) => {
       if (err.name === "ValidationError") {
         next(new BadRequestError("Invalid data provided"));
       } else {
@@ -36,7 +36,7 @@ const addArticle = (req, res, next) => {
 
 const removeArticle = (req, res, next) => {
   Article.findById(req.params.articleId)
-    .then(article => {
+    .then((article) => {
       if (!article) {
         return next(new NotFoundError("Article not found"));
       }
@@ -49,11 +49,11 @@ const removeArticle = (req, res, next) => {
         .then(() => {
           res.send({ data: article });
         })
-        .catch(err => {
+        .catch((err) => {
           next(err);
         });
     })
-    .catch(err => {
+    .catch((err) => {
       if (err.name === "CastError") {
         next(new BadRequestError("Invalid data provided"));
       } else {
@@ -65,5 +65,5 @@ const removeArticle = (req, res, next) => {
 module.exports = {
   addArticle,
   getArticles,
-  removeArticle
+  removeArticle,
 };
