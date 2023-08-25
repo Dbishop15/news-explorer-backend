@@ -56,8 +56,9 @@ Set up two files for storing logs:
 
 - Figma Design: https://www.figma.com/file/z1bxDn7eBEDlsDhnZ9dtin/Your-Final-Project?type=design&node-id=22618-1012&mode=design&t=f3xQ2LcrOLV97XcM-0
 - Backend repo: https://github.com/Dbishop15/news-explorer-backend
+- Frontend repo: https://github.com/Dbishop15/news-explorer-frontend
 
 ## Domain
 
-Front end: https://newsexplorer.servernux.com, https://www.newsexplorer.servernux.com,
-Back end: https://api.newsexplorer.servernux.com
+- Front end: https://newsexplorer.servernux.com, https://www.newsexplorer.servernux.com,
+- Back end: https://api.newsexplorer.servernux.com
